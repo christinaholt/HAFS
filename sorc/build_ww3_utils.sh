@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -xeu
 
 source ./machine-setup.sh > /dev/null 2>&1
@@ -15,6 +15,7 @@ module list
 if [ $target = hera ]; then target=hera.intel ; fi
 if [ $target = orion ]; then target=orion.intel ; fi
 if [ $target = jet ]; then target=jet.intel ; fi
+if [ $target = aws ]; then target=aws.intel ; fi
 
 #module use hafs_forecast.fd/modulefiles
 #module load ufs_${target}

@@ -1,3 +1,4 @@
+#!/bin/bash
 # Create a test function for sh vs. bash detection.  The name is
 # randomly generated to reduce the chances of name collision.
 __ms_function_name="setup__test_function__$$"
@@ -19,7 +20,14 @@ fi
 target=""
 USERNAME=`echo $LOGNAME | awk '{ print tolower($0)'}`
 
-if [[ -d /lfs4 ]] ; then
+if [[ $PLATFORM == "aws" ]] ; then
+    target=aws
+    if ( ! eval module help > /dev/null 2>&1 ) ; then
+        echo load the module command 1>&2
+        source /home/ubuntu/apps/lmod/lmod/init/$__ms_shell
+    fi
+    module purge
+elif [[ -d /lfs4 ]] ; then
     # We are on NOAA Jet
     if ( ! eval module help > /dev/null 2>&1 ) ; then
         echo load the module command 1>&2

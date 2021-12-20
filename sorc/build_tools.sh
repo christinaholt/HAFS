@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eux
 source ./machine-setup.sh > /dev/null 2>&1
 cwd=`pwd`
@@ -13,6 +13,11 @@ if [ $target = hera ] || [ $target = orion ] || [ $target = jet ]; then
   export F90=ifort
   export CC=icc
   export MPIFC=mpif90
+elif [ $target = aws ]; then
+  export FC=ifort
+  export F90=ifort
+  export CC=icc
+  export MPIFC=mpifort
 elif [ $target = wcoss_cray ]; then
   export FC="ftn -static"
   export F90="ftn -free -static"
