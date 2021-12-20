@@ -53,7 +53,7 @@ set(exec_dir ${CMAKE_SOURCE_DIR}/../../exec)
 set(ext_dir ${CMAKE_SOURCE_DIR}/../hafs_extlibs/lib)
 set(ext_inc_dir ${CMAKE_SOURCE_DIR}/../hafs_extlibs/include)
 
-set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O3 -heap-arrays -mkl=sequential -convert big_endian -assume byterecl -DLINUX")
+set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O3 -heap-arrays -qmkl=sequential -convert big_endian -assume byterecl -DLINUX")
 
 add_executable(${exe_name} ${fortran_srcs})
 

@@ -241,7 +241,7 @@ _extlib_fftw (){
 
     PREFIX=${HAFS_UTILS_EXTLIBS}
     export F77=`which ifort`
-    export CC=`which gcc`
+    export CC=`which icc`
 
     # Configure the compile-time environment for the FFTW application
     # build.
@@ -404,7 +404,7 @@ _setup_compiler (){
     export MV=/bin/mv
     export RANLIB=/usr/bin/ranlib
     export RM=/bin/rm
-    export CC=gcc
+    export CC=icc
     export F77=ifort
     export FC=ifort
     ##export MPIFC=mpif90 (Moved to build_tools.sh)
@@ -418,7 +418,7 @@ _setup_compiler (){
 # Define all compiler flags for the analysis-update application.
 
     export ANALYSIS_UPDATE_DEBUG=""
-    export ANALYSIS_UPDATE_FCFLAGS="-O3 -heap-arrays -mkl=sequential -convert big_endian -assume byterecl -DLINUX"
+    export ANALYSIS_UPDATE_FCFLAGS="-O3 -heap-arrays -qmkl=sequential -convert big_endian -assume byterecl -DLINUX"
 
 # Define all compiler flags for the obs-preproc application.
 
