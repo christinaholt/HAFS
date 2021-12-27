@@ -27,14 +27,14 @@ export WW3_BINDIR="${WW3_DIR}/bin"
 export WW3_TMPDIR=${WW3_DIR}/tmp
 export WW3_EXEDIR=${WW3_DIR}/exe
 export WW3_COMP=$target 
-export WW3_CC=gcc
-export WW3_F90=gfortran
+export WW3_CC=icc
+export WW3_F90=ifort
 export SWITCHFILE="${WW3_DIR}/esmf/switch"
 
 export WWATCH3_ENV=${WW3_BINDIR}/wwatch3.env
-export PNG_LIB=${PNG_LIB:-$PNG_ROOT/lib64/libpng.a}
+export PNG_LIB=${PNG_LIB:-$PNG_ROOT/lib/libpng.a}
 export Z_LIB=${Z_LIB:-$ZLIB_ROOT/lib/libz.a}
-export JASPER_LIB=${JASPER_LIB:-$JASPER_ROOT/lib64/libjasper.a}
+export JASPER_LIB=${JASPER_LIB:-$JASPER_ROOT/lib/libjasper.a}
 export WWATCH3_NETCDF=NC4
 export NETCDF_CONFIG=${NETCDF_ROOT:-${NETCDF}}/bin/nc-config
 
