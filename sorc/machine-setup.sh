@@ -24,7 +24,7 @@ if [[ $PLATFORM == "aws" ]] ; then
     target=aws
     if ( ! eval module help > /dev/null 2>&1 ) ; then
         echo load the module command 1>&2
-        source /home/ubuntu/apps/lmod/lmod/init/$__ms_shell
+        source /shared/apps/lmod/lmod/init/$__ms_shell
     fi
     module purge
 elif [[ -d /lfs4 ]] ; then

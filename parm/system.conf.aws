@@ -21,24 +21,24 @@ inputroot=/scratch1/NCEPDEV/hwrf/noscrub/hafs-input/COMGFSv16
 
 [dir]
 ## Non-scrubbed directory for track files, etc.  Make sure you edit this.
-CDNOSCRUB=/scratch1/NCEPDEV/{disk_project}/noscrub/{ENV[USER]}/hafstrak
-DOCNdir=/scratch1/NCEPDEV/{disk_project}/noscrub/{ENV[USER]}/DOCN
-DATMdir=/scratch1/NCEPDEV/{disk_project}/noscrub/{ENV[USER]}/DATM
+CDNOSCRUB=/lustre/HAFS_OUTPUT/noscrub/hafstrak
+DOCNdir=/lustre/HAFS_OUTPUT/noscrub/DOCN
+DATMdir=/lustre/HAFS_OUTPUT/noscrub/DATM
 ## Save directory.  Make sure you edit this.
-CDSAVE=/scratch1/NCEPDEV/{disk_project}/save/{ENV[USER]}
+CDSAVE=/lustre/HAFS_OUTPUT/save
 ## Scrubbed directory for large work files.  Make sure you edit this.
-CDSCRUB=/scratch1/NCEPDEV/{disk_project}/scrub/{ENV[USER]}
+CDSCRUB=/lustre/HAFS_OUTPUT/scrub
 ## Syndat directory for finding which cycles to run
-syndat=/scratch1/NCEPDEV/hwrf/noscrub/input/SYNDAT-PLUS
+CDSCRUB=/lustre/data/HAFS_INPUT/syndat
 ## Input GFS data directory
-COMgfs=/scratch1/NCEPDEV/hwrf/noscrub/hafs-input/COMGFSv16
+COMgfs=/lustre/data/HAFS_INPUT
 COMINgfs={COMgfs}
-COMrtofs=/scratch1/NCEPDEV/hwrf/noscrub/hafs-input/COMRTOFSv2
+COMrtofs=/lustre/data/HAFS_INPUT
 COMINrtofs={COMrtofs}
 ## A-Deck directory for graphics
-ADECKhafs=/scratch1/NCEPDEV/hwrf/noscrub/input/abdeck/aid
+ADECKhafs=/lustre/data/HAFS_INPUT/abdeck/aid
 ## B-Deck directory for graphics
-BDECKhafs=/scratch1/NCEPDEV/hwrf/noscrub/input/abdeck/btk
+BDECKhafs=/lustre/data/HAFS_INPUT/abdeck/btk
 
 [holdvars]
 WHERE_AM_I=aws    ;; Which cluster?  (For setting up environment.)
