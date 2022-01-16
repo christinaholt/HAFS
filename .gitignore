@@ -13,3 +13,5 @@
 system.conf
 fix/
 rocoto/*.xml
+sorc/hafs_tools.fd/sorc/hafs_extlibs
+*build*
