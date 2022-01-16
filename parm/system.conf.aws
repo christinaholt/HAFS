@@ -25,11 +25,11 @@ CDNOSCRUB=/lustre/HAFS_OUTPUT/noscrub/hafstrak
 DOCNdir=/lustre/HAFS_OUTPUT/noscrub/DOCN
 DATMdir=/lustre/HAFS_OUTPUT/noscrub/DATM
 ## Save directory.  Make sure you edit this.
-CDSAVE=/lustre/HAFS_OUTPUT/save
+CDSAVE=/lustre
 ## Scrubbed directory for large work files.  Make sure you edit this.
 CDSCRUB=/lustre/HAFS_OUTPUT/scrub
 ## Syndat directory for finding which cycles to run
-CDSCRUB=/lustre/data/HAFS_INPUT/syndat
+syndat=/lustre
 ## Input GFS data directory
 COMgfs=/lustre/data/HAFS_INPUT
 COMINgfs={COMgfs}

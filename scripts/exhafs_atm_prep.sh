@@ -151,7 +151,7 @@ if [ $gtype = uniform ] || [ $gtype = stretch ] ;  then
   echo "${APRUNO} $MAKEOROGSSH $CRES 4 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
   echo "${APRUNO} $MAKEOROGSSH $CRES 5 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
   echo "${APRUNO} $MAKEOROGSSH $CRES 6 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
-if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ]; then
+if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = aws ]; then
   echo 'wait' >> orog.file1
 fi
   chmod u+x $DATA/orog.file1
@@ -178,7 +178,7 @@ elif [ $gtype = nest ]; then
   echo "${APRUNO} $MAKEOROGSSH $CRES 5 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
   echo "${APRUNO} $MAKEOROGSSH $CRES 6 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
   echo "${APRUNO} $MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
-if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ]; then
+if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = aws ]; then
   echo 'wait' >> orog.file1
 fi
   chmod u+x $DATA/orog.file1
@@ -232,7 +232,7 @@ elif [ $gtype = regional ]; then
   echo "............ execute $MAKEOROGSSH ................."
   #echo "$MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA " >>$DATA/orog.file1
   echo "${APRUNO} $MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
-if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ]; then
+if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = aws ]; then
   echo 'wait' >> orog.file1
 fi
   chmod u+x $DATA/orog.file1
@@ -243,7 +243,7 @@ fi
 
   date
   echo "............ execute $FILTERTOPOSSH .............."
-  ${APRUNS} $FILTERTOPOSSH $CRES $grid_dir $orog_dir $filter_dir
+  $FILTERTOPOSSH $CRES $grid_dir $orog_dir $filter_dir
 
   echo "............ execute shave to reduce grid and orography files to required compute size .............."
   cd $filter_dir

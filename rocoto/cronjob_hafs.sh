@@ -28,8 +28,8 @@ date
 #PYTHON3=/apps/intel/intelpython3/bin/python3
 
 HOMEhafs=/lustre/HAFS
-dev="-s sites/orion.ent -f"
-PYTHON3=/apps/intel-2020/intel-2020/intelpython3/bin/python3
+dev="-s sites/aws.ent -f"
+PYTHON3=/usr/bin/python3
 
 cd ${HOMEhafs}/rocoto
 
@@ -46,7 +46,9 @@ EXPT=$(basename ${HOMEhafs})
 #   config.EXPT=${EXPT} config.SUBEXPT=${EXPT} # Laura
 
 # Run one cycle of a storm
- ${PYTHON3} ./run_hafs.py -t ${dev} 2020082512 13L HISTORY config.EXPT=${EXPT}
+# ${PYTHON3} ./run_hafs.py -t ${dev} 2020082512 13L HISTORY config.EXPT=${EXPT}
+# SAM 18L 
+ ${PYTHON3} ./run_hafs.py -t ${dev} 2021092400 18L HISTORY config.EXPT=${EXPT}
 
 #===============================================================================
 
