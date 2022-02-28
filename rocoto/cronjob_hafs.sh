@@ -49,6 +49,9 @@ EXPT=$(basename ${HOMEhafs})
 # ${PYTHON3} ./run_hafs.py -t ${dev} 2020082512 13L HISTORY config.EXPT=${EXPT}
 # SAM 18L 
  ${PYTHON3} ./run_hafs.py -t ${dev} 2021092400 18L HISTORY config.EXPT=${EXPT}
+# ${HOMEhafs}/parm/examples/hafs_regional_C96s1n4_180x180.conf
+# ${PYTHON3} ./run_hafs.py -t ${dev} 2021081600 06L HISTORY config.EXPT=${EXPT}
+# ${HOMEhafs}/parm/examples/hafs_regional_C96s1n4_180x180.conf
 
 #===============================================================================
 
