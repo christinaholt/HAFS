@@ -289,8 +289,8 @@
             <datadep age="02:00" minsize="300000000"><cyclestr>&COMgfs;/gfs.@Y@m@d/@H/gfs.t@Hz.pgrb2.0p25.f126</cyclestr></datadep>
 @** endif
 @** if GFSVER==PROD2021
-            <datadep age="02:00" minsize="300000000"><cyclestr>&COMgfs;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.pgrb2.0p25.f126</cyclestr></datadep>
-            <datadep age="02:00" minsize="6000000000"><cyclestr>&COMgfs;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.atmf0126.nc</cyclestr></datadep>
+            <datadep age="02:00" minsize="300000000"><cyclestr>&COMgfs;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.pgrb2.0p25.f006</cyclestr></datadep>
+            <datadep age="02:00" minsize="6000000000"><cyclestr>&COMgfs;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.atmf0006.nc</cyclestr></datadep>
 @** endif
           </or>
         </and>
@@ -581,7 +581,7 @@
     <account>&ACCOUNT;</account>
     &RESERVATION;
     <queue>&QUEUE_FORECAST;</queue>
-    &PE_EXTRA;
+    &PE_FCST;
     &FORECAST_RESOURCES;
     &ENV_VARS;
 
