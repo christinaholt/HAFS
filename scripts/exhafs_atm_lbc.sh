@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -xe
+ulimit -s unlimited
 
 NCP=${NCP:-'/bin/cp'}
 NLN=${NLN:-'/bin/ln -sf'}

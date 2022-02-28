@@ -2,6 +2,8 @@
 
 set -xe
 
+ulimit -s unlimited
+
 NCP=${NCP:-'/bin/cp'}
 NLN=${NLN:-'/bin/ln -sf'}
 NDATE=${NDATE:-ndate}
@@ -9,7 +11,7 @@ NDATE=${NDATE:-ndate}
 TOTAL_TASKS=${TOTAL_TASKS:-2016}
 NCTSK=${NCTSK:-12}
 NCNODE=${NCNODE:-24}
-OMP_NUM_THREADS=${OMP_NUM_THREADS:-2}
+OMP_NUM_THREADS=${OMP_NUM_THREADS:-1}
 OMP_STACKSIZE=${OMP_STACKSIZE:-2048m}
 APRUNC=${APRUNC:-"aprun -b -j1 -n${TOTAL_TASKS} -N${NCTSK} -d${OMP_NUM_THREADS} -cc depth"}
 export APRUN=time

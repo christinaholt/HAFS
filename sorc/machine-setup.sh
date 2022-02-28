@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 # Create a test function for sh vs. bash detection.  The name is
 # randomly generated to reduce the chances of name collision.
 __ms_function_name="setup__test_function__$$"
@@ -22,9 +22,9 @@ USERNAME=`echo $LOGNAME | awk '{ print tolower($0)'}`
 
 if [[ $PLATFORM == "aws" ]] ; then
     target=aws
+    source /shared/apps/lmod/lmod/init/$__ms_shell
     if ( ! eval module help > /dev/null 2>&1 ) ; then
         echo load the module command 1>&2
-        source /shared/apps/lmod/lmod/init/$__ms_shell
     fi
     module purge
 elif [[ -d /lfs4 ]] ; then
