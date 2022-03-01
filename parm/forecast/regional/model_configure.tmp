@@ -18,7 +18,7 @@ write_dopost:            _write_dopost_
 output_history:          _output_history_
 num_files:               2
 filename_base:           'atm' 'sfc'
-output_file:             'netcdf_parallel' 'netcdf_parallel'
+output_file:             'netcdf' 'netcdf'
 ichunk2d:                -1
 jchunk2d:                -1
 ichunk3d:                -1
