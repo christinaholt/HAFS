@@ -2,6 +2,8 @@
 
 set -xe
 
+ulimit -s unlimited
+
 if [ ${ENSDA} = YES ]; then
   export NHRS=${NHRS_ENS:-126}
   export NBDYHRS=${NBDYHRS_ENS:-3}
