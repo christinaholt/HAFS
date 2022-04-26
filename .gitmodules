@@ -1,19 +1,19 @@
 [submodule "ufs-weather-model"]
 	path = sorc/hafs_forecast.fd
 	url = https://github.com/christinaholt/ufs-weather-model.git
-	branch = aws_port
+	branch = hafs_singularity
 [submodule "UPP"]
 	path = sorc/hafs_post.fd
 	url = https://github.com/christinaholt/UPP.git
-	branch = aws_port
+	branch = hafs_singularity
 [submodule "UFS_UTILS"]
 	path = sorc/hafs_utils.fd
 	url = https://github.com/christinaholt/UFS_UTILS.git
-	branch = aws_port
+	branch = hafs_singularity
 [submodule "gfdl-tracker"]
 	path = sorc/hafs_vortextracker.fd
 	url = https://github.com/christinaholt/gfdl-tracker.git
-	branch = aws_port
+	branch = hafs_singularity
 [submodule "NCEPLIBS-pyprodutil"]
 	path = ush/produtil_repo
 	url = https://github.com/hafs-community/NCEPLIBS-pyprodutil.git
@@ -21,7 +21,7 @@
 [submodule "sorc/hafs_gsi.fd"]
 	path = sorc/hafs_gsi.fd
 	url = https://github.com/christinaholt/GSI.git
-	branch = aws_port
+	branch = hafs_singularity
 [submodule "GPLOT"]
 	path = sorc/hafs_graphics.fd/hrd_gplot
 	url = https://github.com/hafs-community/GPLOT.git
