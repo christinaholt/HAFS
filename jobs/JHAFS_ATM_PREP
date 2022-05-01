@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sudo ln -sf /bin/bash /bin/sh
 date
 export PS4='+ $SECONDS + '
 set -xue
@@ -64,10 +63,10 @@ cd $DATA
 
 # Execute ex-script
 if [[ "${run_datm:-no}" == yes ]] ; then
-    ${HOMEhafs}/scripts/exhafs_datm_prep.sh
+    ${EXhafs}/exhafs_datm_prep.sh
     export err=$?
 else
-    ${HOMEhafs}/scripts/exhafs_atm_prep.sh
+    ${EXhafs}/exhafs_atm_prep.sh
     export err=$?
 fi
 exit $err

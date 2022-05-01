@@ -1,12 +1,12 @@
   <!-- hera -->
   <!ENTITY SCHEDULER       "slurm">
   <!ENTITY ACCOUNT         "">
-  <!ENTITY QUEUE_PE        "misccomp"> <!-- queue for PE (parallel environment) jobs -->
+  <!ENTITY QUEUE_PE        "forecast"> <!-- queue for PE (parallel environment) jobs -->
   <!ENTITY QUEUE_FORECAST  "forecast"> <!-- queue for the forecast job -->
-  <!ENTITY PE_EXTRA        "<native>--partition=misccomp</native>">
+  <!ENTITY PE_EXTRA        "<native>--partition=forecast</native>">
   <!ENTITY PE_FCST         "<native>--partition=forecast</native>">
   <!ENTITY QUEUE_SERIAL    "misccomp"> <!-- queue for serial jobs -->
-  <!ENTITY SERIAL_EXTRA    "">
+  <!ENTITY SERIAL_EXTRA    "<native>--partition=misccomp</native>">
   <!ENTITY QUEUE_SHARED    "misccomp">
   <!ENTITY SHARED_EXTRA    "">
   <!ENTITY QUEUE_SERVICE   "service">

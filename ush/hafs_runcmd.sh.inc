@@ -32,7 +32,13 @@ elif [ "$machine" = wcoss_dell_p3 ]; then
   export APRUNC=${APRUNC:-"mpirun"}
   export APRUNF=${APRUNF:-"mpirun cfp"}
   export BACKGROUND=${BACKGROUND:-""}
-elif [ "$machine" = jet ] || [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$PLATFORM" = aws ]; then
+elif [ "$machine" = aws ]; then
+  export APRUNS=${APRUNS:-"mpirun -np 1 --cpus-per-proc 1"}
+  export APRUNO=${APRUNO:-"mpirun -np ${TOTAL_TASKS}"}
+  export APRUNS=${APRUNC:-"mpirun -np ${TOTAL_TASKS}"}
+  export APRUNF=${APRUNF:-"time"}
+  export BACKGROUND=${BACKGROUND:-"&"}
+elif [ "$machine" = jet ] || [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = aws ]; then
   export APRUNS=${APRUNS:-"srun --mpi=pmi2 --ntasks=1 --nodes=1 --ntasks-per-node=1 --cpus-per-task=1"}
   export APRUNO=${APRUNO:-"srun --exclusive --ntasks=1 --nodes=1 --ntasks-per-node=${NCTSK} --cpus-per-task=${PURE_OMP_THREADS}"}
   export APRUNC=${APRUNC:-"srun --mpi=pmi2 --ntasks=${TOTAL_TASKS} --ntasks-per-node=${NCTSK} --cpus-per-task=${OMP_NUM_THREADS}"}

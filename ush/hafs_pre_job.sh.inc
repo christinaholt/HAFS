@@ -113,9 +113,9 @@ elif [[ -d /lustre && -d /ncrc ]] ; then
     module purge
 elif [[ "$(hostname)" =~ "odin" ]]; then
     target="odin"
-elif [[ "$(hostname)" =~ "-" ]]; then
+elif [[ $PLATFORM == 'aws' ||  "$(hostname)" =~ "-" ]]; then
     target="aws"
-    source /shared/.bash_profile
+    #    source /shared/.bash_profile
 else
     echo WARNING: UNKNOWN PLATFORM 1>&2
 fi
