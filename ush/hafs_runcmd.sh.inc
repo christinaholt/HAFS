@@ -35,7 +35,9 @@ elif [ "$machine" = wcoss_dell_p3 ]; then
 elif [ "$machine" = jet ] || [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$PLATFORM" = aws ]; then
   export APRUNS=${APRUNS:-"srun --mpi=pmi2 --ntasks=1 --nodes=1 --ntasks-per-node=1 --cpus-per-task=1"}
   export APRUNO=${APRUNO:-"srun --exclusive --ntasks=1 --nodes=1 --ntasks-per-node=${NCTSK} --cpus-per-task=${PURE_OMP_THREADS}"}
-  export APRUNC=${APRUNC:-"srun --mpi=pmi2 --ntasks=${TOTAL_TASKS} --ntasks-per-node=${NCTSK} --cpus-per-task=${OMP_NUM_THREADS}"}
+  #export APRUNC=${APRUNC:-"srun --mpi=pmi2 --ntasks=${TOTAL_TASKS} --ntasks-per-node=${NCTSK} --cpus-per-task=${OMP_NUM_THREADS}"}
+  export APRUNC=${APRUNC:-"srun --mpi=pmi2"}
+  #  export APRUNC=${APRUNC:-"mpirun -n ${TOTAL_TASKS}"}
   #export APRUNF=${APRUNF:-"srun --mpi=pmi2 --ntasks=${TOTAL_TASKS} --ntasks-per-node=${NCTSK} --cpus-per-task=${OMP_NUM_THREADS} --multi-prog"}
   #export APRUNF=${APRUNF:-"source"}
   export APRUNF=${APRUNF:-"time"}

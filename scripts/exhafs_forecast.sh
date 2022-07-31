@@ -3,6 +3,12 @@
 set -xe
 
 ulimit -s unlimited
+export I_MPI_OFI_LIBRARY_INTERNAL=0
+export FI_PROVIDER=efa
+export I_MPI_FABRICS=ofi
+export I_MPI_OFI_PROVIDER=efa
+export I_MPI_PIN_DOMAIN=omp
+export KMP_AFFINITY=compact
 
 NCP=${NCP:-'/bin/cp'}
 NLN=${NLN:-'/bin/ln -sf'}

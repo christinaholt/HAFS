@@ -40,7 +40,7 @@ $Build_forecast && {
 echo " .... Building forecast .... "
 ./build_forecast.sh > $logs_dir/build_forecast.log 2>&1
 }
-
+exit 0
 #------------------------------------
 # build post
 #------------------------------------
