@@ -16,11 +16,11 @@ source ${HOLDVARS:-storm1.holdvars.txt}
 export machine=${WHERE_AM_I:-wcoss_cray}
 export envir=${envir:-prod} # prod, para, test
 export RUN_ENVIR=${RUN_ENVIR:-dev} # nco or dev
-if [ "${RUN_ENVIR^^}" != NCO ]; then
-  module use ${HOMEhafs}/sorc/hafs_utils.fd/modulefiles
-  module load build.${machine}.intel
-  module list
-fi
+#if [ "${RUN_ENVIR^^}" != NCO ]; then
+#  module use ${HOMEhafs}/sorc/hafs_utils.fd/modulefiles
+#  module load build.${machine}.intel
+#  module list
+#fi
 
 source ${USHhafs}/hafs_runcmd.sh.inc
 
@@ -54,9 +54,9 @@ else
 fi
 
 export SCRUBDATA=${SCRUBDATA:-YES}
-if [ "${SCRUBDATA}" = YES ]; then
-  rm -rf $DATA
-fi
+#if [ "${SCRUBDATA}" = YES ]; then
+#  rm -rf $DATA
+#fi
 
 mkdir -p $OUTDIR $DATA
 cd $DATA

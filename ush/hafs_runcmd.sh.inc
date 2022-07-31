@@ -1,3 +1,4 @@
+#!/bin/bash
 #==============================================================================
 # This script sets job node/core, mpi/omp envionment, and run commands.
 #==============================================================================
@@ -33,16 +34,37 @@ elif [ "$machine" = wcoss_dell_p3 ]; then
   export APRUNF=${APRUNF:-"mpirun cfp"}
   export BACKGROUND=${BACKGROUND:-""}
 elif [ "$machine" = aws ]; then
-  export APRUNS=${APRUNS:-"mpirun -np 1 --cpus-per-proc 1"}
-  export APRUNO=${APRUNO:-"mpirun -np ${TOTAL_TASKS}"}
-  export APRUNS=${APRUNC:-"mpirun -np ${TOTAL_TASKS}"}
-  export APRUNF=${APRUNF:-"time"}
+
+    cmd="
+source /opt/intel/oneapi/setvars.sh --force  &&
+source /usr/share/lmod/lmod/init/bash &&
+module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ &&
+module load intelmpi && "
+
+    SINGRUN="singularity exec \
+-B /lustre/HAFS_container:/opt/HAFS_OUTER \
+-B /lustre/HAFS_OUTPUT:/opt/HAFS_OUTPUT:rw \
+-B /lustre/data/HAFS_INPUT:/opt/data/HAFS_INPUT \
+-B /opt/intel/compilers_and_libraries_2020.2.254 \
+-B /usr/lib/x86_64-linux-gnu/modulecmd.tcl \
+-B /usr/share/modules/modulefiles \
+-B /opt/amazon/efa \
+-B /lustre/fix/hafs-20210520-fix/fix \
+/shared/HAFS_containers/axiom-hafs_inteloneapi-latest.sif \
+bash -c "
+
+
+  export APRUNS=${APRUNS:-"srun --mpi=pmi2 --ntasks=1 --nodes=1 --ntasks-per-node=1 --cpus-per-task=1 $SINGRUN"}
+  export APRUNO=${APRUNO:-"srun --mpi=pmi2 --ntasks=1 --ntasks-per-node=${NCTSK} --cpus-per-task=${PURE_OMP_THREADS} $SINGRUN"}
+  #export APRUNC=${APRUNC:-"srun --mpi=pmi2 --ntasks=${TOTAL_TASKS} --ntasks-per-node=${NCTSK} --cpus-per-task=${OMP_NUM_THREADS} $SINGRUN"}
+  export APRUNC=${APRUNC:-"mpirun -np ${TOTAL_TASKS} $SINGRUN"}
+  export APRUNF=${APRUNF:-"time $SINGRUN"}
   export BACKGROUND=${BACKGROUND:-"&"}
 elif [ "$machine" = jet ] || [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = aws ]; then
   export APRUNS=${APRUNS:-"srun --mpi=pmi2 --ntasks=1 --nodes=1 --ntasks-per-node=1 --cpus-per-task=1"}
   export APRUNO=${APRUNO:-"srun --exclusive --ntasks=1 --nodes=1 --ntasks-per-node=${NCTSK} --cpus-per-task=${PURE_OMP_THREADS}"}
   export APRUNC=${APRUNC:-"srun --mpi=pmi2 --ntasks=${TOTAL_TASKS} --ntasks-per-node=${NCTSK} --cpus-per-task=${OMP_NUM_THREADS}"}
-  #export APRUNF=${APRUNF:-"srun --mpi=pmi2 --ntasks=${TOTAL_TASKS} --ntasks-per-node=${NCTSK} --cpus-per-task=${OMP_NUM_THREADS} --multi-prog"}
+  #export APRUNF=${APRUNF:-"srun --ntasks=${TOTAL_TASKS} --ntasks-per-node=${NCTSK} --cpus-per-task=${OMP_NUM_THREADS} --multi-prog"}
   #export APRUNF=${APRUNF:-"source"}
   export APRUNF=${APRUNF:-"time"}
   export BACKGROUND=${BACKGROUND:-"&"}

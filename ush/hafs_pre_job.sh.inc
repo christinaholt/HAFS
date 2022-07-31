@@ -19,7 +19,11 @@ fi
 target=""
 USERNAME=`echo $LOGNAME | awk '{ print tolower($0)'}`
 
-if [[ -d /lfs4 ]] ; then
+if [[ $PLATFORM == 'aws' ||  "$(hostname)" =~ "-" ]]; then
+    target="aws"
+    source /shared/.bash_profile
+    export PATH=$PATH:/shared/singularity/bin
+elif [[ -d /lfs4 ]] ; then
     # We are on NOAA Jet
     if ( ! eval module help > /dev/null 2>&1 ) ; then
         echo load the module command 1>&2
@@ -113,9 +117,6 @@ elif [[ -d /lustre && -d /ncrc ]] ; then
     module purge
 elif [[ "$(hostname)" =~ "odin" ]]; then
     target="odin"
-elif [[ $PLATFORM == 'aws' ||  "$(hostname)" =~ "-" ]]; then
-    target="aws"
-    #    source /shared/.bash_profile
 else
     echo WARNING: UNKNOWN PLATFORM 1>&2
 fi
@@ -128,10 +129,10 @@ unset __ms_function_name
 
 export WHERE_AM_I=${target}
 
-if [[ Q"${HOMEhafs:-}" != "Q" ]]; then
-  module use $HOMEhafs/modulefiles
-  module load modulefile.hafs.$WHERE_AM_I
-fi
+#if [[ Q"${HOMEhafs:-}" != "Q" ]]; then
+#  module use $HOMEhafs/modulefiles
+#  module load modulefile.hafs.$WHERE_AM_I
+#fi
 
 # Avoild "NetCDF: HDF error"
 export HDF5_USE_FILE_LOCKING=FALSE

@@ -6,10 +6,10 @@ cwd=`pwd`
 cd ${cwd}
 
 # Build subcomponets
-./build_all.sh
+#./build_all.sh
 
 # Install executables
-./install_all.sh
+#./install_all.sh
 
 # Link fix files
 ./link_fix.sh

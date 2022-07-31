@@ -5,7 +5,7 @@ set -xe
 ulimit -s unlimited
 
 NCP=${NCP:-'/bin/cp'}
-NLN=${NLN:-'/bin/ln -sf'}
+NLN=${NLN:-'/bin/ln -f'}
 NDATE=${NDATE:-ndate}
 
 TOTAL_TASKS=${TOTAL_TASKS:-2016}
@@ -1061,8 +1061,34 @@ ${NCP} ${HOMEhafs}/sorc/hafs_forecast.fd/tests/parm/fd_nems.yaml ./
 
 # Copy the executable and run the forecast
 FORECASTEXEC=${FORECASTEXEC:-${EXEChafs}/hafs_forecast.x}
-${NCP} -p ${FORECASTEXEC} ./hafs_forecast.x
-${APRUNC} ./hafs_forecast.x 1>out.forecast 2>err.forecast
+#${NCP} -p ${FORECASTEXEC} ./hafs_forecast.x
+
+source /shared/apps/lmod/lmod/init/bash
+module purge
+#export I_MPI_OFI_LIBRARY_INTERNAL=0
+#export FI_PROVIDER=efa
+export I_MPI_DEBUG=5
+export I_MPI_FABRICS=ofi
+#export I_MPI_OFI_PROVIDER=efa
+#export I_MPI_PIN_DOMAIN=omp
+export KMP_AFFINITY=compact
+export SLURM_EXPORT_ENV=ALL
+export I_MPI_PMI_LIBRARY=/opt/slurm/lib/libpmi.so
+
+pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
+source /usr/share/lmod/lmod/init/bash && \
+module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
+module load intelmpi && \
+module use /opt/HAFS/modulefiles && \
+module load modulefile.hafs.aws && \
+module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
+module load build.aws.intel && \
+ulimit -s unlimited && \
+cd ${DATA/lustre/opt} && "
+
+
+#${APRUNC} ./hafs_forecast.x 1>out.forecast 2>err.forecast
+eval "$APRUNC '$pre_cmd ${FORECASTEXEC/lustre/opt}'"
 
 # Cat out and err into job log
 cat ./out.forecast

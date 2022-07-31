@@ -257,8 +257,23 @@ fi
 
   #aprun -n 1 -N 1 -j 1 -d 1 -cc depth $exec_dir/shave.x <input.shave.orog
   #aprun -n 1 -N 1 -j 1 -d 1 -cc depth $exec_dir/shave.x <input.shave.grid
-  ${APRUNS} ${SHAVEEXEC} < input.shave.orog
-  ${APRUNS} ${SHAVEEXEC} < input.shave.grid
+
+pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
+source /usr/share/lmod/lmod/init/bash && \
+module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
+module load intelmpi && \
+module use /opt/HAFS/modulefiles && \
+module load modulefile.hafs.aws && \
+module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
+module load build.aws.intel && \
+ulimit -s unlimited && \
+cd ${filter_dir/lustre/opt} && "
+
+eval "$APRUNS '$pre_cmd $SHAVEEXEC < input.shave.orog'"
+eval "$APRUNS '$pre_cmd $SHAVEEXEC < input.shave.grid'"
+
+#  ${APRUNS} ${SHAVEEXEC} < input.shave.orog
+#  ${APRUNS} ${SHAVEEXEC} < input.shave.grid
 
   # Copy the shaved files with the halo of 4
   cp $filter_dir/oro.${CASE}.tile${tile}.shave.nc $out_dir/${CASE}_oro_data.tile${tile}.halo${halop1}.nc
@@ -267,8 +282,10 @@ fi
   # Now shave the orography file with no halo and then the grid file with a halo of 3. This is necessary for running the model.
   echo $npts_cgx $npts_cgy $halo \'$filter_dir/oro.${CASE}.tile${tile}.nc\' \'$filter_dir/oro.${CASE}.tile${tile}.shave.nc\' >input.shave.orog.halo${halo}
   echo $npts_cgx $npts_cgy $halo \'$filter_dir/${CASE}_grid.tile${tile}.nc\' \'$filter_dir/${CASE}_grid.tile${tile}.shave.nc\' >input.shave.grid.halo${halo}
-  ${APRUNS} ${SHAVEEXEC} < input.shave.orog.halo${halo}
-  ${APRUNS} ${SHAVEEXEC} < input.shave.grid.halo${halo}
+#  ${APRUNS} ${SHAVEEXEC} < input.shave.orog.halo${halo}
+#  ${APRUNS} ${SHAVEEXEC} < input.shave.grid.halo${halo}
+eval "$APRUNS '$pre_cmd $SHAVEEXEC < input.shave.orog.halo${halo}'"
+eval "$APRUNS '$pre_cmd $SHAVEEXEC < input.shave.grid.halo${halo}'"
 
   # Copy the shaved files with the halo of 3
   cp $filter_dir/oro.${CASE}.tile${tile}.shave.nc $out_dir/${CASE}_oro_data.tile${tile}.halo${halo}.nc
@@ -278,8 +295,10 @@ fi
   echo $npts_cgx $npts_cgy $halo0 \'$filter_dir/oro.${CASE}.tile${tile}.nc\' \'$filter_dir/oro.${CASE}.tile${tile}.shave.nc\' >input.shave.orog.halo${halo0}
   echo $npts_cgx $npts_cgy $halo0 \'$filter_dir/${CASE}_grid.tile${tile}.nc\' \'$filter_dir/${CASE}_grid.tile${tile}.shave.nc\' >input.shave.grid.halo${halo0}
 
-  ${APRUNS} ${SHAVEEXEC} < input.shave.orog.halo${halo0}
-  ${APRUNS} ${SHAVEEXEC} < input.shave.grid.halo${halo0}
+#  ${APRUNS} ${SHAVEEXEC} < input.shave.orog.halo${halo0}
+#  ${APRUNS} ${SHAVEEXEC} < input.shave.grid.halo${halo0}
+eval "$APRUNS '$pre_cmd $SHAVEEXEC < input.shave.orog.halo${halo0}'"
+eval "$APRUNS '$pre_cmd $SHAVEEXEC < input.shave.grid.halo${halo0}'"
 
   # Copy the shaved files with the halo of 0
   cp $filter_dir/oro.${CASE}.tile${tile}.shave.nc $out_dir/${CASE}_oro_data.tile${tile}.halo${halo0}.nc
@@ -303,7 +322,7 @@ fi
 
 # Copy mosaic file(s) to output directory.
 cp $grid_dir/${CASE}_*mosaic.nc $out_dir/
-
+#
 #----------------------------------------------------------------
 # Make surface static fields - vegetation type, soil type, etc.
 #
@@ -338,8 +357,8 @@ elif [ $gtype = regional ]; then
   GRIDTYPE=regional
   tile=7
   HALO=$halop1
-  ln -fs $out_dir/${CASE}_grid.tile${tile}.halo${HALO}.nc $out_dir/${CASE}_grid.tile${tile}.nc
-  ln -fs $out_dir/${CASE}_oro_data.tile${tile}.halo${HALO}.nc $out_dir/${CASE}_oro_data.tile${tile}.nc
+  cp -l $out_dir/${CASE}_grid.tile${tile}.halo${HALO}.nc $out_dir/${CASE}_grid.tile${tile}.nc
+  cp -l $out_dir/${CASE}_oro_data.tile${tile}.halo${HALO}.nc $out_dir/${CASE}_oro_data.tile${tile}.nc
   mosaic_file=${out_dir}/${CASE}_mosaic.nc
   the_orog_files='"'${CASE}'_oro_data.tile'${tile}'.nc"'
 else
@@ -357,8 +376,8 @@ input_slope_type_file="${input_sfc_climo_dir}/slope_type.1.0.nc"
 input_soil_type_file="${input_sfc_climo_dir}/soil_type.statsgo.0.05.nc"
 input_vegetation_type_file="${input_sfc_climo_dir}/vegetation_type.igbp.0.05.nc"
 input_vegetation_greenness_file="${input_sfc_climo_dir}/vegetation_greenness.0.144.nc"
-mosaic_file_mdl="${mosaic_file}"
-orog_dir_mdl="${out_dir}"
+mosaic_file_mdl="${mosaic_file/lustre/opt}"
+orog_dir_mdl="${out_dir/lustre/opt}"
 orog_files_mdl=${the_orog_files}
 halo=${HALO}
 maximum_snow_albedo_method="bilinear"
@@ -369,8 +388,38 @@ EOF
 more ./fort.41
 
 #APRUNC="srun --ntasks=6 --ntasks-per-node=6 --cpus-per-task=1"
-cp -p $SFCCLIMOEXEC ./hafs_sfc_climo_gen.x
-$APRUNC ./hafs_sfc_climo_gen.x
+
+module purge
+#export I_MPI_OFI_LIBRARY_INTERNAL=0
+#export FI_PROVIDER=efa
+export I_MPI_DEBUG=5
+#export I_MPI_FABRICS=ofi
+#export I_MPI_OFI_PROVIDER=efa
+export I_MPI_PIN_DOMAIN=omp
+export KMP_AFFINITY=compact
+export SLURM_EXPORT_ENV=ALL
+export I_MPI_PMI_LIBRARY=/opt/slurm/lib/libpmi.so
+
+
+
+pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
+source /usr/share/lmod/lmod/init/bash && \
+module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
+module load intelmpi && \
+module use /opt/HAFS/modulefiles && \
+module load modulefile.hafs.aws && \
+module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
+module load build.aws.intel && \
+ulimit -s unlimited && \
+cd ${sfc_climo_workdir/lustre/opt} && "
+
+#ln -sf /opt/amazon/efa/lib/libfabric.so.1 /opt/intel/oneapi/compiler/2022.0.2/linux/compiler/lib/ && \
+#module use /usr/share/modules/modulefiles && \
+#module load libfabric-aws && \
+
+#cp -p ${SFCCLIMOEXEC/lustre/opt} ./hafs_sfc_climo_gen.x && \
+eval "$APRUNC '$pre_cmd ${SFCCLIMOEXEC/lustre/opt}'"
+#$APRUNC ./hafs_sfc_climo_gen.x
 #$APRUNC $SFCCLIMOEXEC
 
 rc=$?
@@ -442,8 +491,9 @@ EOF
 more ./fort.41
 
 #APRUNC="srun --ntasks=6 --ntasks-per-node=6 --cpus-per-task=1"
-cp -p $SFCCLIMOEXEC ./hafs_sfc_climo_gen.x
-$APRUNC ./hafs_sfc_climo_gen.x
+#cp -p $SFCCLIMOEXEC ./hafs_sfc_climo_gen.x
+eval "$APRUNC '$pre_cmd ./hafs_sfc_climo_gen.x'"
+#$APRUNC ./hafs_sfc_climo_gen.x
 #$APRUNC $SFCCLIMOEXEC
 
 rc=$?

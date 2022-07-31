@@ -115,7 +115,7 @@ FIXCASE=${DATA_BC}/grid/${CASE}
 mkdir -p $DATA_BC ${FIXDIR} ${FIXCASE}
 
 cd $FIXDIR/${CASE}
-ln -sf ${GRID_intercom}/${CASE}/* ./
+cp -Llr ${GRID_intercom}/${CASE}/* .
 
 cd ${DATA_BC}
 
@@ -156,7 +156,7 @@ elif [ $bctype = "gfsgrib2_master" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.master.pgrb2f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.master.pgrb2f${FHR3}
   input_type="grib2"
-  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/GFSphys_var_map.txt"
+  varmap_file="/opt/HAFS/sorc/hafs_utils.fd/parm/varmap_tables/GFSphys_var_map.txt"
   fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
@@ -167,6 +167,7 @@ elif [ $bctype = "gfsgrib2_0p25" ]; then
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3}
   input_type="grib2"
   varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/GFSphys_var_map.txt"
+  varmap_file="/opt/HAFS/sorc/hafs_utils.fd/parm/varmap_tables/GFSphys_var_map.txt"
   fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
@@ -177,6 +178,7 @@ elif [ $bctype = "gfsgrib2ab_0p25" ]; then
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2ab.0p25.f${FHR3}
   input_type="grib2"
   varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/GFSphys_var_map.txt"
+  varmap_file="/opt/HAFS/sorc/hafs_utils.fd/parm/varmap_tables/GFSphys_var_map.txt"
   fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
@@ -227,14 +229,14 @@ if [ $input_type = "grib2" ]; then
     ${WGRIB2} ${grib2_file_input_grid}_tmp -submsg 1 | ${USHhafs}/hafs_grib2_unique.pl | ${WGRIB2} -i ./${grib2_file_input_grid}_tmp -GRIB ./${grib2_file_input_grid}
     #${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
   else
-    ln -sf ${INIDIR}/${grib2_file_input_grid} ./
+    ln -f ${INIDIR}/${grib2_file_input_grid} ./
     #${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
   fi
   INPDIR="./"
 else
   if [ ${ENSDA} = YES ]; then
-   ln -sf ${INIDIR}/${atm_files_input_grid} ./
-   ln -sf ${INIDIR}/${sfc_files_input_grid} ./
+   ln -f ${INIDIR}/${atm_files_input_grid} ./
+   ln -f ${INIDIR}/${sfc_files_input_grid} ./
    INPDIR="./"
   else
    INPDIR=${INIDIR}
@@ -245,16 +247,16 @@ if [ $gtype = regional ]; then
 # set the links to use the 4 halo grid and orog files
 # these are necessary for creating the boundary data
 #
- ln -sf $FIXDIR/$CASE/${CASE}_grid.tile7.halo4.nc $FIXDIR/$CASE/${CASE}_grid.tile7.nc
- ln -sf $FIXDIR/$CASE/${CASE}_oro_data.tile7.halo4.nc $FIXDIR/$CASE/${CASE}_oro_data.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.vegetation_greenness.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.vegetation_greenness.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.soil_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.soil_type.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.slope_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.slope_type.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.substrate_temperature.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.substrate_temperature.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.facsf.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.facsf.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.maximum_snow_albedo.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.maximum_snow_albedo.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.snowfree_albedo.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.snowfree_albedo.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.vegetation_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.vegetation_type.tile7.nc
+ ln -f $FIXDIR/$CASE/${CASE}_grid.tile7.halo4.nc $FIXDIR/$CASE/${CASE}_grid.tile7.nc
+ ln -f $FIXDIR/$CASE/${CASE}_oro_data.tile7.halo4.nc $FIXDIR/$CASE/${CASE}_oro_data.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.vegetation_greenness.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.vegetation_greenness.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.soil_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.soil_type.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.slope_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.slope_type.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.substrate_temperature.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.substrate_temperature.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.facsf.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.facsf.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.maximum_snow_albedo.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.maximum_snow_albedo.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.snowfree_albedo.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.snowfree_albedo.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.vegetation_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.vegetation_type.tile7.nc
 
  mosaic_file_target_grid="$FIXDIR/$CASE/${CASE}_mosaic.nc"
  orog_files_target_grid='"'${CASE}'_oro_data.tile7.halo4.nc"'
@@ -282,15 +284,15 @@ fi
 #
 cat>./fort.41<<EOF
 &config
- mosaic_file_target_grid="${mosaic_file_target_grid}"
- fix_dir_target_grid="$FIXDIR/$CASE"
- orog_dir_target_grid="$FIXDIR/$CASE"
+ mosaic_file_target_grid="${mosaic_file_target_grid/lustre/opt}"
+ fix_dir_target_grid="${FIXDIR/lustre/opt}/$CASE"
+ orog_dir_target_grid="${FIXDIR/lustre/opt}/$CASE"
  orog_files_target_grid=${orog_files_target_grid}
  vcoord_file_target_grid="${vcoord_file_target_grid}"
  mosaic_file_input_grid="${mosaic_file_input_grid:-NULL}"
  orog_dir_input_grid="${orog_dir_input_grid:-NULL}"
  orog_files_input_grid="${orog_files_input_grid:-NULL}"
- data_dir_input_grid="${INPDIR}"
+ data_dir_input_grid="${INPDIR/lustre/opt}"
  atm_files_input_grid="${atm_files_input_grid}"
  atm_core_files_input_grid="${atm_core_files_input:-NULL}"
  atm_tracer_files_input_grid="${atm_tracer_files_input:-NULL}"
@@ -313,9 +315,35 @@ cat>./fort.41<<EOF
 /
 EOF
 
+source /shared/apps/lmod/lmod/init/bash
+module purge
+#export I_MPI_OFI_LIBRARY_INTERNAL=0
+#export FI_PROVIDER=efa
+export I_MPI_DEBUG=5
+#export I_MPI_FABRICS=ofi
+#export I_MPI_OFI_PROVIDER=efa
+export I_MPI_PIN_DOMAIN=omp
+export KMP_AFFINITY=compact
+export SLURM_EXPORT_ENV=ALL
+export I_MPI_PMI_LIBRARY=/opt/slurm/lib/libpmi.so
 
-cp -p ${CHGRESCUBEEXEC} ./hafs_chgres_cube.x
-${APRUNC} ./hafs_chgres_cube.x
+pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
+source /usr/share/lmod/lmod/init/bash && \
+module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
+module load intelmpi && \
+module use /opt/HAFS/modulefiles && \
+module load modulefile.hafs.aws && \
+module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
+module load build.aws.intel && \
+ulimit -s unlimited && \
+cd ${DATA_BC/lustre/opt} && "
+
+
+eval "$APRUNC '$pre_cmd ${CHGRESCUBEEXEC}'"
+
+
+#cp -p ${CHGRESCUBEEXEC} ./hafs_chgres_cube.x
+#${APRUNC} ./hafs_chgres_cube.x
 #${APRUNC} ${CHGRESCUBEEXEC}
 
 #

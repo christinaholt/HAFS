@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #set -eux
 set -x
 
@@ -43,7 +43,7 @@ if [ ! -s $executable ]; then
   echo "FATAL ERROR: ${executable} does not exist"
   echo
   set -x
-  exit 1 
+#  exit 1 
 fi
 
 mosaic_grid=C${res}_mosaic.nc
@@ -73,7 +73,20 @@ cat > input.nml <<EOF
   /
 EOF
 
-$APRUN $executable
+opt_dir=${outdir/lustre/opt}
+
+pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
+source /usr/share/lmod/lmod/init/bash && \
+module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
+module load intelmpi && \
+module use /opt/HAFS/modulefiles && \
+module load modulefile.hafs.aws && \
+module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
+module load build.aws.intel && \
+ulimit -s unlimited && \
+cd ${opt_dir} && "
+
+eval "$APRUNS '$pre_cmd $executable'"
 
 if [ $? -ne 0 ]; then
   set +x

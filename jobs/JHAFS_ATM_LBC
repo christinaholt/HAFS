@@ -2,7 +2,6 @@
 
 date
 export PS4='+ $SECONDS + '
-set -xue
 
 export HOMEhafs=${HOMEhafs:?}
 export USHhafs=${USHhafs:-${HOMEhafs}/ush}
@@ -17,13 +16,17 @@ export machine=${WHERE_AM_I:-wcoss_cray}
 export envir=${envir:-prod} # prod, para, test
 export RUN_ENVIR=${RUN_ENVIR:-dev} # nco or dev
 if [ "${RUN_ENVIR^^}" != NCO ]; then
+  source /opt/intel/oneapi/setvars.sh --force
+  source /shared/apps/lmod/lmod/init/bash
   module use ${HOMEhafs}/sorc/hafs_utils.fd/modulefiles
   module load build.${machine}.intel
+  module load prod_util
   module list
 fi
 
 source ${USHhafs}/hafs_runcmd.sh.inc
 
+set -xue
 # Run setpdy and initialize PDY variables
 #setpdy.sh
 #. ./PDY

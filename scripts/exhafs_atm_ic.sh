@@ -91,7 +91,7 @@ FIXCASE=${DATA}/grid/${CASE}
 mkdir -p $DATA ${FIXDIR} ${FIXCASE}
 
 cd $FIXDIR/${CASE}
-ln -sf ${GRID_intercom}/${CASE}/* ./
+cp -Lr ${GRID_intercom}/${CASE}/* .
 
 cd $DATA
 
@@ -190,14 +190,14 @@ if [ $input_type = "grib2" ]; then
     ${WGRIB2} ${grib2_file_input_grid}_tmp -submsg 1 | ${USHhafs}/hafs_grib2_unique.pl | ${WGRIB2} -i ./${grib2_file_input_grid}_tmp -GRIB ./${grib2_file_input_grid}
     #${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
   else
-    ln -sf ${INIDIR}/${grib2_file_input_grid} ./
+    ln -f ${INIDIR}/${grib2_file_input_grid} ./
     #${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
   fi
   INPDIR="./"
 else
   if [ ${ENSDA} = YES ]; then
-   ln -sf ${INIDIR}/${atm_files_input_grid} ./
-   ln -sf ${INIDIR}/${sfc_files_input_grid} ./
+   ln -f ${INIDIR}/${atm_files_input_grid} ./
+   ln -f ${INIDIR}/${sfc_files_input_grid} ./
    INPDIR="./"
   else
    INPDIR=${INIDIR}
@@ -206,9 +206,9 @@ fi
 
 if [ $gtype = uniform ] || [ $gtype = stretch ] || [ $gtype = nest ];  then
 
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}*.nc $FIXDIR/$CASE/.
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}*.nc $FIXDIR/$CASE/.
  if [ $gtype = nest ];  then
-   ln -sf $FIXDIR/$CASE/${CASE}_coarse_mosaic.nc $FIXDIR/$CASE/${CASE}_mosaic.nc
+   ln -f $FIXDIR/$CASE/${CASE}_coarse_mosaic.nc $FIXDIR/$CASE/${CASE}_mosaic.nc
  fi
  mosaic_file_target_grid="$FIXDIR/$CASE/${CASE}_mosaic.nc"
  orog_files_target_grid='"'${CASE}'_oro_data.tile1.nc","'${CASE}'_oro_data.tile2.nc","'${CASE}'_oro_data.tile3.nc","'${CASE}'_oro_data.tile4.nc","'${CASE}'_oro_data.tile5.nc","'${CASE}'_oro_data.tile6.nc"'
@@ -227,16 +227,16 @@ elif [ $gtype = regional ]; then
 # set the links to use the 4 halo grid and orog files
 # these are necessary for creating the boundary data
 #
- ln -sf $FIXDIR/$CASE/${CASE}_grid.tile7.halo4.nc $FIXDIR/$CASE/${CASE}_grid.tile7.nc
- ln -sf $FIXDIR/$CASE/${CASE}_oro_data.tile7.halo4.nc $FIXDIR/$CASE/${CASE}_oro_data.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.vegetation_greenness.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.vegetation_greenness.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.soil_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.soil_type.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.slope_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.slope_type.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.substrate_temperature.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.substrate_temperature.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.facsf.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.facsf.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.maximum_snow_albedo.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.maximum_snow_albedo.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.snowfree_albedo.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.snowfree_albedo.tile7.nc
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}.vegetation_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.vegetation_type.tile7.nc
+ ln -f $FIXDIR/$CASE/${CASE}_grid.tile7.halo4.nc $FIXDIR/$CASE/${CASE}_grid.tile7.nc
+ ln -f $FIXDIR/$CASE/${CASE}_oro_data.tile7.halo4.nc $FIXDIR/$CASE/${CASE}_oro_data.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.vegetation_greenness.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.vegetation_greenness.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.soil_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.soil_type.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.slope_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.slope_type.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.substrate_temperature.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.substrate_temperature.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.facsf.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.facsf.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.maximum_snow_albedo.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.maximum_snow_albedo.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.snowfree_albedo.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.snowfree_albedo.tile7.nc
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}.vegetation_type.tile7.halo4.nc $FIXDIR/$CASE/${CASE}.vegetation_type.tile7.nc
 
  mosaic_file_target_grid="$FIXDIR/$CASE/${CASE}_mosaic.nc"
  orog_files_target_grid='"'${CASE}'_oro_data.tile7.halo4.nc"'
@@ -267,15 +267,15 @@ fi
 #
 cat>./fort.41<<EOF
 &config
- mosaic_file_target_grid="${mosaic_file_target_grid}"
- fix_dir_target_grid="$FIXDIR/$CASE"
- orog_dir_target_grid="$FIXDIR/$CASE"
+ mosaic_file_target_grid="${mosaic_file_target_grid/lustre/opt}"
+ fix_dir_target_grid="${FIXDIR/lustre/opt}/$CASE"
+ orog_dir_target_grid="${FIXDIR/lustre/opt}/$CASE"
  orog_files_target_grid=${orog_files_target_grid}
- vcoord_file_target_grid="${vcoord_file_target_grid}"
+ vcoord_file_target_grid="${vcoord_file_target_grid/lustre/opt}"
  mosaic_file_input_grid="${mosaic_file_input_grid:-NULL}"
  orog_dir_input_grid="${orog_dir_input_grid:-NULL}"
  orog_files_input_grid="${orog_files_input_grid:-NULL}"
- data_dir_input_grid="${INPDIR}"
+ data_dir_input_grid="${INPDIR/lustre/opt}"
  atm_files_input_grid="${atm_files_input_grid}"
  atm_core_files_input_grid="${atm_core_files_input:-NULL}"
  atm_tracer_files_input_grid="${atm_tracer_files_input:-NULL}"
@@ -298,8 +298,36 @@ cat>./fort.41<<EOF
 /
 EOF
 
-cp -p ${CHGRESCUBEEXEC} ./hafs_chgres_cube.x
-${APRUNC} ./hafs_chgres_cube.x
+source /shared/apps/lmod/lmod/init/bash
+module purge
+unset MODULEPATH
+#export I_MPI_OFI_LIBRARY_INTERNAL=0
+#export FI_PROVIDER=efa
+export I_MPI_DEBUG=5
+#export I_MPI_FABRICS=ofi
+#export I_MPI_OFI_PROVIDER=efa
+export I_MPI_PIN_DOMAIN=omp
+export KMP_AFFINITY=compact
+export SLURM_EXPORT_ENV=ALL
+export I_MPI_PMI_LIBRARY=/opt/slurm/lib/libpmi.so
+
+pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
+source /usr/share/lmod/lmod/init/bash && \
+module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
+module load intelmpi && \
+module use /opt/HAFS/modulefiles && \
+module load modulefile.hafs.aws && \
+module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
+module load build.aws.intel && \
+ulimit -s unlimited && \
+cd ${DATA/lustre/opt} && "
+
+
+eval "$APRUNC '$pre_cmd ${CHGRESCUBEEXEC}'"
+
+
+#cp -p ${CHGRESCUBEEXEC} ./hafs_chgres_cube.x
+#${APRUNC} ./hafs_chgres_cube.x
 #${APRUNC} ${CHGRESCUBEEXEC}
 
 if [ $gtype = uniform ] || [ $gtype = stretch ] || [ $gtype = nest ];  then
@@ -341,12 +369,12 @@ fi
 # For the global-nesting configuration, run for the 7th tile
 if [ $gtype = nest ];  then
 
- ln -sf $FIXDIR/$CASE/fix_sfc/${CASE}*.nc $FIXDIR/$CASE/.
+ ln -f $FIXDIR/$CASE/fix_sfc/${CASE}*.nc $FIXDIR/$CASE/.
 
- ln -sf $FIXDIR/$CASE/${CASE}_nested_mosaic.nc $FIXDIR/$CASE/${CASE}_mosaic.nc
+ ln -f $FIXDIR/$CASE/${CASE}_nested_mosaic.nc $FIXDIR/$CASE/${CASE}_mosaic.nc
  export GRIDTYPE=nest
  HALO=${HALO:-0}
- mosaic_file_target_grid="$FIXDIR/$CASE/${CASE}_mosaic.nc"
+ mosaic_file_target_grid="${FIXDIR/lustre/opt}/$CASE/${CASE}_mosaic.nc"
  orog_files_target_grid='"'${CASE}'_oro_data.tile7.nc"'
  convert_atm=.true.
  convert_sfc=.true.

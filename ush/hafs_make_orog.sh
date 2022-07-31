@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eux
 
@@ -55,7 +55,7 @@ indir=$hist_dir
 executable=${OROGEXEC:-$exec_dir/hafs_orog.x}
 if [ ! -s $executable ]; then
   echo "executable does not exist"
-  exit 1 
+  #exit 1 
 fi
 
 if [ ! -s $workdir ]; then mkdir -p $workdir ;fi
@@ -98,13 +98,42 @@ fi
 if [ $is_latlon -eq 0 ]; then
    cp ${griddir}/$OUTGRID .
 fi
-cp $executable .
+#cp $executable .
 
 echo  $mtnres $lonb $latb $jcap $NR $NF1 $NF2 $efac $blat > INPS
 echo $OUTGRID >> INPS
 echo $orogfile >> INPS
 cat INPS
-$APRUNO $executable < INPS
+
+module purge
+
+#export I_MPI_OFI_LIBRARY_INTERNAL=0
+#export FI_PROVIDER=efa
+export I_MPI_DEBUG=5
+#export I_MPI_FABRICS=ofi
+#export I_MPI_OFI_PROVIDER=efa
+#export I_MPI_PIN_DOMAIN=omp
+#export KMP_AFFINITY=compact
+export SLURM_EXPORT_ENV=ALL
+export I_MPI_PMI_LIBRARY=/opt/slurm/lib/libpmi.so
+
+
+# module load libfabric-aws/1.13.2amzn1.0 && \
+
+pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
+source /usr/share/lmod/lmod/init/bash && \
+module use /usr/share/modules/modulefiles && \
+module use /opt/HAFS/modulefiles && \
+module load modulefile.hafs.aws && \
+module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
+module load build.aws.intel && \
+module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
+module load intelmpi && \
+ulimit -s unlimited && \
+cd ${workdir/lustre/opt} && "
+
+eval "$APRUNO '$pre_cmd $executable < INPS'"
+#$APRUNO $pre_cmd $executable < INPS
 
 if [ $? -ne 0 ]; then
   echo "ERROR in running $executable "
