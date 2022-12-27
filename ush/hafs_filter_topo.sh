@@ -75,10 +75,9 @@ EOF
 
 opt_dir=${outdir/lustre/opt}
 
+module purge
 pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
 source /usr/share/lmod/lmod/init/bash && \
-module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
-module load intelmpi && \
 module use /opt/HAFS/modulefiles && \
 module load modulefile.hafs.aws && \
 module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \

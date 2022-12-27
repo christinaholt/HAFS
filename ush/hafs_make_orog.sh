@@ -127,8 +127,6 @@ module use /opt/HAFS/modulefiles && \
 module load modulefile.hafs.aws && \
 module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
 module load build.aws.intel && \
-module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
-module load intelmpi && \
 ulimit -s unlimited && \
 cd ${workdir/lustre/opt} && "
 

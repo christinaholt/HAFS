@@ -37,21 +37,21 @@ elif [ "$machine" = aws ]; then
 
     cmd="
 source /opt/intel/oneapi/setvars.sh --force  &&
-source /usr/share/lmod/lmod/init/bash &&
-module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ &&
-module load intelmpi && "
+source /usr/share/lmod/lmod/init/bash && "
 
     SINGRUN="singularity exec \
--B /lustre/HAFS_container:/opt/HAFS_OUTER \
+-B /lustre/HAFS_sing_exe:/opt/HAFS_OUTER \
 -B /lustre/HAFS_OUTPUT:/opt/HAFS_OUTPUT:rw \
 -B /lustre/data/HAFS_INPUT:/opt/data/HAFS_INPUT \
 -B /opt/intel/compilers_and_libraries_2020.2.254 \
 -B /usr/lib/x86_64-linux-gnu/modulecmd.tcl \
--B /usr/share/modules/modulefiles \
--B /opt/amazon/efa \
 -B /lustre/fix/hafs-20210520-fix/fix \
 /shared/HAFS_containers/axiom-hafs_inteloneapi-latest.sif \
 bash -c "
+
+
+#-B /usr/share/modules/modulefiles \
+#-B /opt/amazon/efa \
 
 
   export APRUNS=${APRUNS:-"srun --mpi=pmi2 --ntasks=1 --nodes=1 --ntasks-per-node=1 --cpus-per-task=1 $SINGRUN"}

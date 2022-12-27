@@ -40,11 +40,8 @@ if [ $name == 'launch' ] ; then
       python3.8 $script $script_args"
 else
 
-    module load intelmpi
     cmd="
       source /usr/share/lmod/lmod/init/bash && \
-      module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
-      module load intelmpi && \
       env && \
       $script"
 fi

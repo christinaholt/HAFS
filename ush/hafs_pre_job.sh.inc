@@ -22,6 +22,7 @@ USERNAME=`echo $LOGNAME | awk '{ print tolower($0)'}`
 if [[ $PLATFORM == 'aws' ||  "$(hostname)" =~ "-" ]]; then
     target="aws"
     source /shared/.bash_profile
+    source /shared/apps/lmod/lmod/init/bash
     export PATH=$PATH:/shared/singularity/bin
 elif [[ -d /lfs4 ]] ; then
     # We are on NOAA Jet

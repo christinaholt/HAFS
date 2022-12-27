@@ -233,7 +233,7 @@ elif [ $gtype = regional ]; then
   date
   echo "............ execute $MAKEOROGSSH ................."
   #echo "$MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA " >>$DATA/orog.file1
-  echo "${APRUN} $MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
+  echo "${APRUN} $MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" > $DATA/orog.file1
 if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = aws ]; then
   echo 'wait' >> orog.file1
 fi
@@ -258,10 +258,9 @@ fi
   #aprun -n 1 -N 1 -j 1 -d 1 -cc depth $exec_dir/shave.x <input.shave.orog
   #aprun -n 1 -N 1 -j 1 -d 1 -cc depth $exec_dir/shave.x <input.shave.grid
 
+module purge
 pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
 source /usr/share/lmod/lmod/init/bash && \
-module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
-module load intelmpi && \
 module use /opt/HAFS/modulefiles && \
 module load modulefile.hafs.aws && \
 module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
@@ -366,6 +365,7 @@ else
   exit 1
 fi
 
+
 cat>./fort.41<<EOF
 &config
 input_facsf_file="${input_sfc_climo_dir}/facsf.1.0.nc"
@@ -400,12 +400,13 @@ export KMP_AFFINITY=compact
 export SLURM_EXPORT_ENV=ALL
 export I_MPI_PMI_LIBRARY=/opt/slurm/lib/libpmi.so
 
+echo $OMP_NUM_THREADS
 
+export OMP_NUM_THREADS=1
+ulimit -s unlimited
 
 pre_cmd="source /opt/intel/oneapi/setvars.sh --force && \
 source /usr/share/lmod/lmod/init/bash && \
-module use /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/modulefiles/ && \
-module load intelmpi && \
 module use /opt/HAFS/modulefiles && \
 module load modulefile.hafs.aws && \
 module use /opt/HAFS/sorc/hafs_utils.fd/modulefiles && \
