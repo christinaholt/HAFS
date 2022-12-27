@@ -1,0 +1,240 @@
+# This file is parsed through the hafs.conf [holdvars] configuration
+# section.  It is used to control the workflow for the NCO J-Jobs, and
+# can also be used for debugging: simply source the
+# storm*.holdvars.txt in a ksh/sh/bash shell.
+
+export TZ=UTC # Orion workaround
+
+export envir=prod
+
+export storm_num=1
+export RUN_HRDGRAPHICS=NO
+export RUN_VORTEXINIT=NO
+export RUN_GSI_VR=NO
+export RUN_GSI_VR_FGAT=NO
+export RUN_GSI_VR_ENS=NO
+export RUN_GSI=NO
+export RUN_FGAT=NO
+export RUN_ENVAR=NO
+export RUN_ENSDA=NO
+export RUN_ENKF=NO
+export GSID01=NO
+export GSID02=NO
+export GSID03=NO
+export FGATSTR=-3
+export FGATINV=3
+export FGATEND=3
+
+export warm_start_opt=0
+
+export utilexec=/lustre/HAFS-AMD/exec
+
+export HOMEhafs=/lustre/HAFS-AMD
+export EXEChafs=/lustre/HAFS-AMD/exec
+export PARMhafs=/lustre/HAFS-AMD/parm
+export EXhafs=/lustre/HAFS-AMD/scripts
+export JOBhafs=/lustre/HAFS-AMD/jobs
+export USHhafs=/lustre/HAFS-AMD/ush
+export FIXhafs=/lustre/HAFS-AMD/fix
+export WORKhafs=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/2021092400/18L
+export DATA=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/2021092400/18L
+export COMhafs=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/com/2021092400/18L
+export COMIN=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/com/2021092400/18L
+export COMOUT=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/com/2021092400/18L
+export COMgfs=/lustre/data/HAFS_INPUT
+export DATMdir=/lustre/HAFS_AMD_OUTPUT/noscrub/DATM
+export DOCNdir=/lustre/HAFS_AMD_OUTPUT/noscrub/DOCN
+
+export run_datm=no
+export run_docn=no
+export run_dwav=no
+
+export make_mesh_atm=no
+export mesh_atm=dummy.nc
+
+export docn_mesh_nx_global=1440
+export docn_mesh_ny_global=720
+export make_mesh_ocn=no
+export mesh_ocn=dummy.nc
+export docn_input_path=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/2021092400/18L/intercom/cdeps
+export datm_input_path=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/2021092400/18L/intercom/cdeps
+export DOCN_SOURCE=NONE
+export DATM_SOURCE=NONE
+
+export SYNDAThafs=/lustre
+export ADECKhafs=/lustre/data/HAFS_INPUT/abdeck/aid
+export BDECKhafs=/lustre/data/HAFS_INPUT/abdeck/btk
+
+export PARMforecast=/lustre/HAFS-AMD/parm/forecast/regional
+
+export YMDH=2021092400 cyc=00 CYCLE=2021092400
+
+export stormlabel=storm1
+export STORM=SAM
+export STORMID=18L
+
+export NHRS=6
+export NBDYHRS=3
+export GFSVER=PROD2021
+export ictype=gfsnetcdf
+export bctype=gfsgrib2ab_0p25
+export ictype_ens=gfsnetcdf
+export bctype_ens=gfsnetcdf
+export halo_blend=10
+
+export CASE=C768
+export LEVS=65
+export gtype=regional
+export gridfixdir=/let/hafs_grid/generate/grid
+export stretch_fac=1.0001
+export target_lon=-45.1
+export target_lat=15.0
+export refine_ratio=4
+export istart_nest=128
+export jstart_nest=228
+export iend_nest=1407
+export jend_nest=1307
+export halo=3
+export halop1=4
+export halo0=0
+
+export vcoord_file_target_grid=/lustre/HAFS-AMD/parm/levels/hafs_hyblev.l65.txt
+
+export use_bufr_nr=no
+export grid_ratio_fv3_regional=1
+export s_ens_h=150
+export s_ens_v=-0.5
+export online_satbias=no
+export corrlength=500
+export lnsigcutoff=1.3
+
+export ccpp_suite_regional=FV3_HAFS_v0_gfdlmp_tedmf
+export ccpp_suite_glob=FV3_HAFS_v0_gfdlmp_tedmf
+export ccpp_suite_nest=FV3_HAFS_v0_gfdlmp_tedmf
+
+export dt_atmos=90
+export restart_interval=0
+export quilting=.true.
+export write_groups=1
+export write_tasks_per_group=81
+export write_dopost=.false.
+export output_history=.true.
+
+export print_esmf=.false.
+
+export glob_k_split=1
+export glob_n_split=7
+export glob_layoutx=8
+export glob_layouty=10
+export glob_npx=769
+export glob_npy=769
+
+export k_split=4
+export n_split=5
+export layoutx=24
+export layouty=27
+export npx=2561
+export npy=2161
+export npz=64
+
+export fhswr=1800.
+export fhlwr=1800.
+export nstf_n1=2
+export nstf_n2=0
+export nstf_n3=0
+export nstf_n4=0
+export nstf_n5=0
+
+export app_domain=regional
+export output_grid=rotated_latlon
+export output_grid_cen_lon=-45.1
+export output_grid_cen_lat=15.0
+export output_grid_lon1=-39.000000
+export output_grid_lat1=-34.500000
+export output_grid_lon2=39.000000
+export output_grid_lat2=34.500000
+export output_grid_dlon=0.03
+export output_grid_dlat=0.03
+
+export out_prefix=sam18l.2021092400
+export out_prefix_nodate=sam18l
+export synop_gridspecs="latlon -93.100000:3200:0.030000 -19.500000:2300:0.030000"
+export trker_gridspecs="latlon -93.100000:3200:0.030000 -19.500000:2300:0.030000"
+
+# ENSDA related items
+export ENS_SIZE=4
+export GRID_RATIO_ENS=1
+export NHRS_ENS=6
+export NBDYHRS_ENS=6
+export CASE_ENS=C768
+export LEVS_ENS=65
+export gtype_ens=regional
+export gridfixdir_ens=/let/hafs_grid/generate/grid
+export stretch_fac_ens=1.0001
+export target_lon_ens=-45.1
+export target_lat_ens=15.0
+export refine_ratio_ens=4
+export istart_nest_ens=128
+export jstart_nest_ens=228
+export iend_nest_ens=1407
+export jend_nest_ens=1307
+export ccpp_suite_regional_ens=FV3_HAFS_v0_gfdlmp_tedmf
+export ccpp_suite_glob_ens=FV3_HAFS_v0_gfdlmp_tedmf
+export ccpp_suite_nest_ens=FV3_HAFS_v0_gfdlmp_tedmf
+export dt_atmos_ens=90
+export restart_interval_ens=0
+export quilting_ens=.true.
+export write_groups_ens=1
+export write_tasks_per_group_ens=81
+export write_dopost_ens=.false.
+export output_history_ens=.true.
+export k_split_ens=4
+export n_split_ens=5
+export glob_layoutx_ens=8
+export glob_layouty_ens=10
+export glob_npx_ens=769
+export glob_npy_ens=769
+export layoutx_ens=24
+export layouty_ens=27
+export npx_ens=2561
+export npy_ens=2161
+export npz_ens=64
+export output_grid_dlon_ens=0.03
+export output_grid_dlat_ens=0.03
+export synop_gridspecs_ens="latlon -93.100000:3200:0.030000 -19.500000:2300:0.030000"
+export trker_gridspecs_ens="latlon -93.100000:3200:0.030000 -19.500000:2300:0.030000"
+
+export run_ocean=no
+export ocean_model=hycom
+export cpl_dt=360
+export cpl_atm_ocn=cmeps_2way
+export ocn_tasks=60
+export ocean_start_dtg=auto
+export merge_import=.true.
+
+export run_wave=no
+export wave_model=WW3
+export cpl_atm_wav=cmeps_1way_1to2
+export cpl_wav_ocn=cmeps_sidebyside
+export wav_tasks=60
+export med_tasks=60
+
+export RUN_ENVIR=EMC
+export PATH=:.:$PATH:$utilexec
+
+export CONFhafs=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/com/2021092400/18L/storm1.conf
+export HOLDVARS=/lustre/HAFS_AMD_OUTPUT/scrub/HAFS-AMD/com/2021092400/18L/storm1.holdvars.txt
+
+export CENLO=-45.1
+export CENLA=15.0
+
+if [[ "$RUN_ENVIR" != "NCO" && "$RUN_ENVIR" != "nco" ]] ; then
+    export EXPT=HAFS-AMD
+    export SUBEXPT=HAFS-AMD
+    export WHERE_AM_I=aws
+    export CDSAVE=/lustre
+    export CDNOSCRUB=/lustre/HAFS_AMD_OUTPUT/noscrub/hafstrak
+    export CDSCRUB=/lustre/HAFS_AMD_OUTPUT/scrub
+    export RUNhafs=HAFS-AMD
+fi
+
