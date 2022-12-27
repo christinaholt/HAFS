@@ -228,18 +228,18 @@ elif [ $gtype = regional ]; then
   echo "================================================================================== "
 
   echo "............ execute $MAKEGRIDSSH ................."
-  ${APRUNS} $MAKEGRIDSSH $CRES $grid_dir $stretch_fac $target_lon $target_lat $refine_ratio $istart_nest_halo $jstart_nest_halo $iend_nest_halo $jend_nest_halo $halo $script_dir
+  ${APRUN} $MAKEGRIDSSH $CRES $grid_dir $stretch_fac $target_lon $target_lat $refine_ratio $istart_nest_halo $jstart_nest_halo $iend_nest_halo $jend_nest_halo $halo $script_dir
 
   date
   echo "............ execute $MAKEOROGSSH ................."
   #echo "$MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA " >>$DATA/orog.file1
-  echo "${APRUNO} $MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
+  echo "${APRUN} $MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
 if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = aws ]; then
   echo 'wait' >> orog.file1
 fi
   chmod u+x $DATA/orog.file1
   #aprun -j 1 -n 4 -N 4 -d 6 -cc depth cfp $DATA/orog.file1
-  ${APRUNF} $DATA/orog.file1
+  ${APRUN} $DATA/orog.file1
   wait
   #rm $DATA/orog.file1
 

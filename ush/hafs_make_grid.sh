@@ -69,7 +69,7 @@ elif  [ $nargv -eq 12 ]; then
     echo "executable does not exist"
     exit 1 
   fi
-  $APRUN $executable --grid_type gnomonic_ed --nlon $nx --grid_name C${res}_grid --do_schmidt --stretch_factor ${stretch_fac} --target_lon ${target_lon} --target_lat ${target_lat} \
+  $APRUNS $executable --grid_type gnomonic_ed --nlon $nx --grid_name C${res}_grid --do_schmidt --stretch_factor ${stretch_fac} --target_lon ${target_lon} --target_lat ${target_lat} \
      --nest_grid --parent_tile 6 --refine_ratio $refine_ratio --istart_nest $istart_nest --jstart_nest $jstart_nest --iend_nest $iend_nest --jend_nest $jend_nest --halo $halo --great_circle_algorithm
 
 fi
@@ -100,7 +100,7 @@ elif [ $ntiles -eq 7 ]; then
 #special case for the regional grid. For now we have only 1 tile and it is tile 7
 #
 elif [ $ntiles -eq 1 ];then
-  $APRUN $executable --num_tiles $ntiles --dir $outdir --mosaic C${res}_mosaic --tile_file C${res}_grid.tile7.nc
+  $APRUNS $executable --num_tiles $ntiles --dir $outdir --mosaic C${res}_mosaic --tile_file C${res}_grid.tile7.nc
 fi
 
 exit

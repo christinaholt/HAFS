@@ -3,12 +3,12 @@
 set -xe
 
 ulimit -s unlimited
-export I_MPI_OFI_LIBRARY_INTERNAL=0
-export FI_PROVIDER=efa
-export I_MPI_FABRICS=ofi
-export I_MPI_OFI_PROVIDER=efa
-export I_MPI_PIN_DOMAIN=omp
-export KMP_AFFINITY=compact
+#export I_MPI_OFI_LIBRARY_INTERNAL=0
+#export FI_PROVIDER=efa
+#export I_MPI_FABRICS=ofi
+#export I_MPI_OFI_PROVIDER=efa
+#export I_MPI_PIN_DOMAIN=omp
+#export KMP_AFFINITY=compact
 
 NCP=${NCP:-'/bin/cp'}
 NLN=${NLN:-'/bin/ln -sf'}
@@ -1068,11 +1068,24 @@ ${NCP} ${HOMEhafs}/sorc/hafs_forecast.fd/tests/parm/fd_nems.yaml ./
 # Copy the executable and run the forecast
 FORECASTEXEC=${FORECASTEXEC:-${EXEChafs}/hafs_forecast.x}
 ${NCP} -p ${FORECASTEXEC} ./hafs_forecast.x
-${APRUNC} ./hafs_forecast.x 1>out.forecast 2>err.forecast
+
+#export I_MPI_OFI_LIBRARY_INTERNAL=0
+#export FI_PROVIDER=efa
+#export I_MPI_DEBUG=5
+#export I_MPI_FABRICS=ofi
+#export I_MPI_OFI_PROVIDER=efa
+#export I_MPI_PIN_DOMAIN=omp
+#export KMP_AFFINITY=compact
+#export SLURM_EXPORT_ENV=ALL
+#export I_MPI_PMI_LIBRARY=/opt/slurm/lib/libpmi.so
+
+
+#${APRUNC} ./hafs_forecast.x 1>out.forecast 2>err.forecast
+${APRUNC} ./hafs_forecast.x
 
 # Cat out and err into job log
-cat ./out.forecast
-cat ./err.forecast
+#cat ./out.forecast
+#cat ./err.forecast
 
 if [ $gtype = regional ] && [ ${run_datm} = no ]; then
 

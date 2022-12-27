@@ -104,7 +104,12 @@ echo  $mtnres $lonb $latb $jcap $NR $NF1 $NF2 $efac $blat > INPS
 echo $OUTGRID >> INPS
 echo $orogfile >> INPS
 cat INPS
-time $executable < INPS
+
+export I_MPI_DEBUG=5
+export SLURM_EXPORT_ENV=ALL
+export I_MPI_PMI_LIBRARY=/opt/slurm/lib/libpmi.so
+
+$APRUNO $executable < INPS
 
 if [ $? -ne 0 ]; then
   echo "ERROR in running $executable "
