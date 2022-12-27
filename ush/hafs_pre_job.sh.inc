@@ -113,7 +113,7 @@ elif [[ -d /lustre && -d /ncrc ]] ; then
     module purge
 elif [[ "$(hostname)" =~ "odin" ]]; then
     target="odin"
-elif [[ "$(hostname)" =~ "-" ]]; then
+elif [[ "$(hostname)" =~ "ip-"  || "$(hostname)" =~ "forecast-" ]]; then
     target="aws"
     source /shared/.bash_profile
 else

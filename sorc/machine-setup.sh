@@ -19,9 +19,12 @@ fi
 
 target=""
 USERNAME=`echo $LOGNAME | awk '{ print tolower($0)'}`
+set -x
 
 if [[ $PLATFORM == "aws" ]] ; then
     target=aws
+    echo $__ms_shell
+    set +x
     source /shared/apps/lmod/lmod/init/$__ms_shell
     if ( ! eval module help > /dev/null 2>&1 ) ; then
         echo load the module command 1>&2

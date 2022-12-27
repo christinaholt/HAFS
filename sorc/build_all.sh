@@ -38,7 +38,7 @@ echo " .... Library build not currently supported .... "
 #------------------------------------
 $Build_forecast && {
 echo " .... Building forecast .... "
-./build_forecast.sh > $logs_dir/build_forecast.log 2>&1
+#./build_forecast.sh > $logs_dir/build_forecast.log 2>&1
 }
 
 #------------------------------------
@@ -46,7 +46,7 @@ echo " .... Building forecast .... "
 #------------------------------------
 $Build_post && {
 echo " .... Building post .... "
-./build_post.sh > $logs_dir/build_post.log 2>&1
+#./build_post.sh > $logs_dir/build_post.log 2>&1
 }
 
 #------------------------------------
@@ -54,7 +54,7 @@ echo " .... Building post .... "
 #------------------------------------
 $Build_vortextracker && {
 echo " .... Building vortextracker .... "
-./build_vortextracker.sh > $logs_dir/build_vortextracker.log 2>&1
+#./build_vortextracker.sh > $logs_dir/build_vortextracker.log 2>&1
 }
 
 #------------------------------------
@@ -62,7 +62,7 @@ echo " .... Building vortextracker .... "
 #------------------------------------
 $Build_utils && {
 echo " .... Building utils .... "
-./build_utils.sh > $logs_dir/build_utils.log 2>&1
+#./build_utils.sh > $logs_dir/build_utils.log 2>&1
 }
 
 #------------------------------------

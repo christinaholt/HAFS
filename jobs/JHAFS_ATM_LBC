@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+sudo ln -sf /bin/bash /bin/sh
 
 date
 export PS4='+ $SECONDS + '

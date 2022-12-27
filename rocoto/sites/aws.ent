@@ -1,16 +1,16 @@
   <!-- hera -->
   <!ENTITY SCHEDULER       "slurm">
   <!ENTITY ACCOUNT         "">
-  <!ENTITY QUEUE_PE        "misccomp"> <!-- queue for PE (parallel environment) jobs -->
+  <!ENTITY QUEUE_PE        "forecast"> <!-- queue for PE (parallel environment) jobs -->
   <!ENTITY QUEUE_FORECAST  "forecast"> <!-- queue for the forecast job -->
-  <!ENTITY PE_EXTRA        "<native>--partition=misccomp</native>">
+  <!ENTITY PE_EXTRA        "<native>--partition=forecast</native>">
   <!ENTITY PE_FCST         "<native>--partition=forecast</native>">
   <!ENTITY QUEUE_SERIAL    "misccomp"> <!-- queue for serial jobs -->
   <!ENTITY SERIAL_EXTRA    "">
   <!ENTITY QUEUE_SHARED    "misccomp">
   <!ENTITY SHARED_EXTRA    "">
-  <!ENTITY QUEUE_SERVICE   "service">
-  <!ENTITY SERVICE_EXTRA   "<native>--partition=service</native>">
+  <!ENTITY QUEUE_SERVICE   "miscomp">
+  <!ENTITY SERVICE_EXTRA   "<native>--partition=miscomp</native>">
   <!ENTITY CORES_EXTRA     "<nodesize>40</nodesize>">
   <!ENTITY NODES_EXTRA     "<nodesize>40</nodesize>">
   <!ENTITY RESERVATION     "">
@@ -56,7 +56,8 @@
   <!ENTITY FORECAST_RESOURCES_regional_40x30io1x80_omp2 "<nodes>64:ppn=20:tpp=2</nodes><envar><name>TOTAL_TASKS</name><value>1280</value></envar><envar><name>NCTSK</name><value>20</value></envar>&FORECAST_EXTRA;">
   <!ENTITY FORECAST_RESOURCES_regional_48x40io1x80_omp2 "<nodes>100:ppn=20:tpp=2</nodes><envar><name>TOTAL_TASKS</name><value>2000</value></envar><envar><name>NCTSK</name><value>20</value></envar>&FORECAST_EXTRA;">
 
-  <!ENTITY FORECAST_RESOURCES_regional_18x10io1x36_omp2 "<nodes>5:ppn=36:tpp=2</nodes><envar><name>TOTAL_TASKS</name><value>180</value></envar><envar><name>NCTSK</name><value>36</value></envar>&FORECAST_EXTRA;">
+  <!ENTITY FORECAST_RESOURCES_axiom "<nodes>10:ppn=96:tpp=2</nodes><envar><name>TOTAL_TASKS</name><value>960</value></envar><envar><name>NCTSK</name><value>96</value></envar>&FORECAST_EXTRA;">
+  <!ENTITY FORECAST_RESOURCES_axiom_equal_procs "<nodes>9:ppn=81</nodes><envar><name>TOTAL_TASKS</name><value>729</value></envar><envar><name>NCTSK</name><value>81</value></envar>&FORECAST_EXTRA;">
   <!ENTITY FORECAST_RESOURCES_regional_40x30io1x140_omp2 "<nodes>67:ppn=20:tpp=2</nodes><envar><name>TOTAL_TASKS</name><value>1340</value></envar><envar><name>NCTSK</name><value>20</value></envar>&FORECAST_EXTRA;">
   <!ENTITY FORECAST_RESOURCES_regional_48x40io1x140_omp2 "<nodes>103:ppn=20:tpp=2</nodes><envar><name>TOTAL_TASKS</name><value>2060</value></envar><envar><name>NCTSK</name><value>20</value></envar>&FORECAST_EXTRA;">
 

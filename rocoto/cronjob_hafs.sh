@@ -27,7 +27,7 @@ date
 #dev="-s sites/hera.ent -f"
 #PYTHON3=/apps/intel/intelpython3/bin/python3
 
-HOMEhafs=/lustre/HAFS
+HOMEhafs=/lustre/HAFS-AMD
 dev="-s sites/aws.ent -f"
 PYTHON3=/usr/bin/python3
 

@@ -20,7 +20,7 @@ elif [ ${target} == "orion" ]; then
 elif [ ${target} == "jet" ]; then
   FIXROOT=/lfs4/HFIP/hwrf-data/hafs-fix-files/hafs-${FIXversion}-fix/fix
 elif [ ${target} == "aws" ]; then
-  FIXROOT=~/hwrf-data/hafs-fix-files/hafs-${FIXversion}-fix/fix
+  FIXROOT=/lustre/fix/hafs-${FIXversion}-fix/fix
 else
   echo "Unknown site " ${target}
   exit 1

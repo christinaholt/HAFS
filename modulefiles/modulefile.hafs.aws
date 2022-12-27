@@ -11,6 +11,8 @@ setenv CMAKE_CXX_COMPILER mpiicpc
 setenv CMAKE_Fortran_COMPILER mpiifort
 setenv CMAKE_Platform aws.intel
 
+module use /opt/intel/impi/2019.8.254/intel64/modulefiles
+
 module use /shared/apps/hpc-stack/modulefiles/stack
 module load hpc/1.2.0
 module load hpc-intel/2021
